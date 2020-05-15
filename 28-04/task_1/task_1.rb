@@ -1,41 +1,43 @@
-require 'pry'
+print "Enter the first file name: "
+input_file_name = gets.strip
 
-
-print "Enter the file name (f.txt): "
-file_name = gets.strip
-
-str = ""
-
-File.open(file_name).each do |line|
-
-  str += line.gsub(/^$\n/, "")
-
+if input_file_name == ""
+  input_file_name = "f.txt"
 end
 
-print "Enter the file name (g.txt): "
-file_name2 = gets.strip
+text_buffer = ""
+File.open(input_file_name).each do |line|
+  text_buffer += line.gsub(/^$\n/, "")
+end
 
-empty_str_off = File.open(file_name2,"w")
-empty_str_off.write str
-empty_str_off.close
+print "Enter the second file name: "
+output_file_name2 = gets.strip
+
+if output_file_name2 == ""
+  output_file_name2 = "g.txt"
+end
+
+output_file = File.open(output_file_name2,"w")
+output_file.write text_buffer
+output_file.close
 
 print "Enter the limit number: "
 limit_num = gets.to_i
 
-str2 = ""
-
-File.open(file_name2).each do |line|
-    if line.size <= limit_num
-    str2 += "#{line.chop.ljust(limit_num)}\n"
-    elsif line.size > limit_num
-      # binding.pry
-      line_new = line[0...limit_num] + "\n"
+text_buffer = ""
+File.open(output_file_name2).each do |line|
+  if line.size <= limit_num
+    text_buffer += "#{line.chop.ljust(limit_num)}\n"
+  elsif line.size > limit_num
+    line_new = line[0...limit_num] + "\n"
+    # This is an alternative implementation of this task.
+    # You can make a line break to not cut the lines.
       # line_new = line.chars.each_slice(limit_num).map{ |el| el.join}.join("\r")
-      str2 += line_new
-    end
+    text_buffer += line_new
+  end
 end
 
-limit_lines = File.open(file_name2,"w")
-limit_lines.write str2
-limit_lines.close
+limit_lines_file = File.open(output_file_name2,"w")
+limit_lines_file.write text_buffer
+limit_lines_file.close
 
