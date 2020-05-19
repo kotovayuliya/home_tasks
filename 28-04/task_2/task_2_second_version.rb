@@ -1,4 +1,4 @@
-require './cleanfile.rb'
+require_relative 'cleanfile.rb'
 
 def palindrome?(string)
   if string.length == 1 || string.length == 0

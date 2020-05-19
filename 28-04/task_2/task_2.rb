@@ -1,4 +1,4 @@
-require './cleanfile'
+require_relative 'cleanfile.rb'
 
 clean_file = Cleanfile.new
 clean_file.open do |str|
