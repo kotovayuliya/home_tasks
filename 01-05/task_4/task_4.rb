@@ -10,9 +10,7 @@ File.open("nums2.txt").each do |line2|
   integ_nums2 = line2.split.map{ |num| num.to_i}
 end
 
-united_nums = []
-united_nums << (integ_nums1 - integ_nums2).join(", ")
-united_nums << (integ_nums2 - integ_nums1).join(", ")
+united_nums = integ_nums1 | integ_nums2
 
 united_nums_file = File.open("nums-unique.txt", "w+")
 united_nums_file.write united_nums.join(", ")
