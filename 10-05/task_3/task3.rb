@@ -3,15 +3,13 @@ parag_num = gets.to_i
 
 parag_counter = 0
 
-lines_with_break_symbol = File.readlines("parag2.txt")
-text = lines_with_break_symbol.join
-lines_without_break_symbol = text.split(/\n/)
+text_buffer = File.readlines("parag2.txt").join.split(/\n/)
 
-lines_without_k_parag = lines_without_break_symbol.each do |string|
+lines_without_k_parag = text_buffer.each do |string|
   if /.+/.match(string)
     parag_counter += 1
     if parag_counter == parag_num
-      lines_without_break_symbol.delete(string)
+      text_buffer.delete(string)
     end
   end
 end
